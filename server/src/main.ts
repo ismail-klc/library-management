@@ -9,6 +9,10 @@ async function bootstrap() {
     // logger: false
   });
 
+  app.enableCors({
+    origin: 'http://localhost:5000',
+    credentials: true
+  })
   app.setGlobalPrefix('api');
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe());
@@ -23,7 +27,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
 
-  await app.listen(3000, async() => {
+  await app.listen(3000, async () => {
     console.log(`Listening on ${await app.getUrl()}`);
   });
 }

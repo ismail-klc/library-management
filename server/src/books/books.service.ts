@@ -40,7 +40,7 @@ export class BooksService {
         const author = await this.authorRepository.findOne({ id: createBookDto.authorId });
         const type = await this.typeRepository.findOne({ id: createBookDto.typeId });
         if (!author || !type) {
-            throw new BadRequestException('Wrong author or type');
+            throw new BadRequestException(['Wrong author or type']);
         }
 
         return this.bookRepository.save({

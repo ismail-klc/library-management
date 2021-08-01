@@ -23,7 +23,7 @@ export class StudentsService {
     async getById(params: FindOneParams) {
         const student = await this.studentRepository.findOne({ id: params.id });
         if(!student){
-            throw new BadRequestException('student not found');
+            throw new BadRequestException(['student not found']);
         } 
 
         return student;

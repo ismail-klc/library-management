@@ -19,12 +19,12 @@ export class AuthService {
     // check email is already registered
     const existedUser = await this.authRepository.findOne({ email: signInDto.email });
     if (!existedUser) {
-      throw new BadRequestException('Wrong password or email');
+      throw new BadRequestException(['Wrong password or email']);
     }
 
     // compare passwords
     if (!await bcrypt.compare(signInDto.password, existedUser.password)) {
-      throw new BadRequestException('Wrong password or email');
+      throw new BadRequestException(['Wrong password or email']);
     }
 
     // return signed jwt token
@@ -35,7 +35,7 @@ export class AuthService {
     // check email is already registered
     const existedUser = await this.authRepository.findOne({ email: signUpDto.email });
     if (existedUser) {
-      throw new BadRequestException('This email is already registered');
+      throw new BadRequestException(['This email is already registered']);
     }
 
     // hash password and save
