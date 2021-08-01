@@ -4,8 +4,8 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 import { Response, Request } from 'express';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { FindOneParams } from 'src/core/find-one.param';
 import { CreateStudentDto } from './dto/create-student.dto';
-import { FindOneParams } from './dto/find-one.param';
 import { StudentsService } from './students.service';
 
 @ApiTags('students')

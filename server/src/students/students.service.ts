@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { FindOneParams } from 'src/core/find-one.param';
 import { Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/create-student.dto';
-import { FindOneParams } from './dto/find-one.param';
 import { Student } from './entities/student.entity';
 
 @Injectable()
