@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, HttpCode, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpCode, Res, UseGuards, Req, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signin.dto';
 import { SignUpDto } from './dto/signup.dto';
@@ -7,6 +7,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 
 @Controller('auth')
+@UseInterceptors(ClassSerializerInterceptor)  
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
@@ -43,7 +44,9 @@ export class AuthController {
   @Get('me')
   @UseGuards(AuthGuard)
   @HttpCode(200)
-  currentUser() {
-    return 'hello'
+  currentUser(@Req() req: Request) {
+    const token = req.cookies.jwt;
+
+    return this.authService.getUser(token);
   }
 }
