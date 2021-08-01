@@ -1,12 +1,14 @@
 import {
     Controller, Get, Post, Body, HttpCode, Res, UseGuards, Req, Param,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Response, Request } from 'express';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { FindOneParams } from './dto/find-one.param';
 import { StudentsService } from './students.service';
 
+@ApiTags('students')
 @Controller('students')
 @UseGuards(AuthGuard)
 export class StudentsController {

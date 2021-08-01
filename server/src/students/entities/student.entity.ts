@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum Gender {
-    Male = 'M',
-    Female = 'F',
-    Other = 'O'
+    Male = 'Male',
+    Female = 'Female',
+    Other = 'Other'
 }
 
 @Entity('students')

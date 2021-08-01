@@ -4,8 +4,9 @@ import { SignInDto } from './dto/signin.dto';
 import { SignUpDto } from './dto/signup.dto';
 import { Response, Request } from 'express';
 import { AuthGuard } from './guards/auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('auth')
 @Controller('auth')
 @UseInterceptors(ClassSerializerInterceptor)  
 export class AuthController {
