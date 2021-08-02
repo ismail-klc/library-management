@@ -11,6 +11,7 @@ import { Type } from './entities/type.entity';
     TypeOrmModule.forFeature([Author, Type, Book])
   ],
   controllers: [BooksController],
-  providers: [BooksService]
+  providers: [BooksService],
+  exports: [BooksService, TypeOrmModule]
 })
 export class BooksModule { }

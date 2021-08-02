@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne } from 'typeorm';
+import { Borrow } from 'src/borrow/entities/borrow.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne, OneToMany } from 'typeorm';
 import { Author } from './author.entity';
 import { Type } from './type.entity';
 
@@ -18,4 +19,7 @@ export class Book {
 
     @ManyToOne(type => Type, type => type.books)
     type: Type;
+
+    @OneToMany(type => Borrow, type => type.book)
+    borrows: Borrow[];
 }

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Borrow } from 'src/borrow/entities/borrow.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 export enum Gender {
     Male = 'Male',
@@ -31,6 +32,9 @@ export class Student {
 
     @Column()
     class: string;
+
+    @OneToMany(type => Borrow, type => type.student)
+    borrows: Borrow[];
 
     @Column({ default: true })
     isActive: boolean;
