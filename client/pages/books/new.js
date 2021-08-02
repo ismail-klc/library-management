@@ -77,6 +77,9 @@ function NewBook({ authors, types }) {
                         }
                     </Form.Select>
                 </Form.Group>
+                {
+                    errors && errors
+                }
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

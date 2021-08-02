@@ -8,21 +8,22 @@ function MyDataTable({
 }) {
     return (
         <DataTable
-                columns={columns}
-                data={data}
-                title={title}
-                highlightOnHover
-                dense
-                subHeader
-                onRowClicked={onClick}
-                subHeaderAlign={Alignment.Left}
-                subHeaderComponent={<SubHeader onClick={btnClick}/>}
-                pagination
-                paginationRowsPerPageOptions={[1, 2, 5]}
-                fixedHeader
-                customStyles={customStyles}
-                responsive
-            />
+            columns={columns}
+            data={data}
+            title={title}
+            highlightOnHover
+            dense
+            subHeader
+            onRowClicked={onClick}
+            subHeaderAlign={Alignment.Left}
+            subHeaderComponent={<SubHeader onClick={btnClick} />}
+            paginationPerPage={5}
+            pagination
+            paginationRowsPerPageOptions={[5, 10, 25]}
+            fixedHeader
+            customStyles={customStyles}
+            responsive
+        />
     )
 }
 

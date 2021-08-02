@@ -42,6 +42,9 @@ function NewAuthor() {
                         value={lastName} onChange={e => setLastName(e.target.value)}
                         type="text" placeholder="Enter the last name" />
                 </Form.Group>
+                {
+                    errors && errors
+                }
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

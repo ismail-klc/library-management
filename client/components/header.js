@@ -24,6 +24,10 @@ function Header({ user }) {
               <a
                 className={`nav-link`} style={{ cursor: 'pointer' }}>Students</a>
             </Link>
+            <Link href="/borrows" >
+              <a
+                className={`nav-link`} style={{ cursor: 'pointer' }}>Borrows</a>
+            </Link>
             <NavDropdown title={"Book"} id="collasible-nav-dropdown">
               <Link href="/books">
                 <a

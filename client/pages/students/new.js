@@ -86,6 +86,9 @@ function NewStudent() {
                         value={schoolNo} onChange={e => setSchoolNo(e.target.value)}
                         type="number" placeholder="Enter school no" />
                 </Form.Group>
+                {
+                    errors && errors
+                }
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

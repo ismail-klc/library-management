@@ -35,6 +35,9 @@ function NewType() {
                         value={name} onChange={e => setName(e.target.value)}
                         type="text" placeholder="Enter a type name" />
                 </Form.Group>
+                {
+                    errors && errors
+                }
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
