@@ -34,6 +34,7 @@ function Authors({ authors }) {
                 highlightOnHover
                 dense
                 subHeader
+                onRowClicked={e => Router.push(`/books/authors/${e.id}`)}
                 subHeaderAlign={Alignment.Left}
                 subHeaderComponent={<SubHeader onClick={() => Router.push('/books/authors/new')}/>}
                 pagination

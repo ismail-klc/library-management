@@ -41,7 +41,7 @@ function Header({ user }) {
           </Nav>
           <Nav>
             <NavDropdown title={user && user.email} id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
               <NavDropdown.Divider />
               <Link href="/auth/signout">
                 <a

@@ -4,6 +4,7 @@ import buildClient from '../../helpers/build-client'
 import DataTable, { Alignment } from 'react-data-table-component';
 import { customStyles } from '../../styles/customStyles';
 import { SubHeader } from '../../components/table-subheader';
+import Router from 'next/router';
 
 const columns = [
     {
@@ -56,8 +57,9 @@ const Students = ({ data }) => {
                 highlightOnHover
                 dense
                 subHeader
+                onRowClicked={e => Router.push(`/students/${e.id}`)}
                 subHeaderAlign={Alignment.Left}
-                subHeaderComponent={<SubHeader />}
+                subHeaderComponent={<SubHeader onClick={() => Router.push('/students/new')}/>}
                 pagination
                 paginationRowsPerPageOptions={[1, 2, 5]}
                 fixedHeader

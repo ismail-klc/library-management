@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import { useRouter } from 'next/router';
 import React from 'react'
 import DataTable, { Alignment } from 'react-data-table-component';
@@ -30,6 +31,7 @@ function Types({ types }) {
                 highlightOnHover
                 dense
                 subHeader
+                onRowClicked={e => Router.push(`/books/types/${e.id}`)}
                 subHeaderAlign={Alignment.Left}
                 subHeaderComponent={<SubHeader onClick={() => router.push('/books/types/new')}/>}
                 pagination

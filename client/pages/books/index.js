@@ -45,6 +45,7 @@ function Books({ books }) {
                 highlightOnHover
                 dense
                 subHeader
+                onRowClicked={e => Router.push(`/books/${e.id}`)}
                 subHeaderAlign={Alignment.Left}
                 subHeaderComponent={<SubHeader onClick={() => Router.push('/books/new')}/>}
                 fixedHeader
