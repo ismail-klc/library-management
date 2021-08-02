@@ -1,7 +1,9 @@
+import Head from 'next/head';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
 import React from 'react'
 import DataTable, { Alignment } from 'react-data-table-component';
+import MyDataTable from '../../../components/my-table';
 import { SubHeader } from '../../../components/table-subheader';
 import buildClient from '../../../helpers/build-client';
 import withAuth from '../../../hocs/withAuth';
@@ -24,22 +26,18 @@ function Types({ types }) {
     const router = useRouter()
     if (typeof window !== 'undefined') {
         return (
-            <DataTable
-                columns={columns}
-                data={types}
-                title="Types"
-                highlightOnHover
-                dense
-                subHeader
-                onRowClicked={e => Router.push(`/books/types/${e.id}`)}
-                subHeaderAlign={Alignment.Left}
-                subHeaderComponent={<SubHeader onClick={() => router.push('/books/types/new')}/>}
-                pagination
-                paginationRowsPerPageOptions={[1, 2, 5]}
-                fixedHeader
-                customStyles={customStyles}
-                responsive
-            />
+            <>
+                <Head>
+                    <title>Types</title>
+                </Head>
+                <MyDataTable
+                    columns={columns}
+                    data={types}
+                    title="Types"
+                    onClick={e => Router.push(`/books/types/${e.id}`)}
+                    btnClick={() => Router.push('/books/types/new')}
+                />
+            </>
         )
     }
 

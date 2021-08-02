@@ -5,6 +5,8 @@ import DataTable, { Alignment } from 'react-data-table-component';
 import { customStyles } from '../../styles/customStyles';
 import { SubHeader } from '../../components/table-subheader';
 import Router from 'next/router';
+import MyDataTable from '../../components/my-table';
+import Head from 'next/head';
 
 const columns = [
     {
@@ -28,13 +30,8 @@ const columns = [
         sortable: true,
     },
     {
-        name: 'Birth',
-        selector: row => row.birthDate,
-        sortable: true,
-    },
-    {
-        name: 'Gender',
-        selector: row => row.gender,
+        name: 'Email',
+        selector: row => row.email,
         sortable: true,
     },
     {
@@ -50,22 +47,18 @@ const Students = ({ data }) => {
 
     if (typeof window !== 'undefined') {
         return (
-            <DataTable
-                columns={columns}
-                data={students}
-                title="Students"
-                highlightOnHover
-                dense
-                subHeader
-                onRowClicked={e => Router.push(`/students/${e.id}`)}
-                subHeaderAlign={Alignment.Left}
-                subHeaderComponent={<SubHeader onClick={() => Router.push('/students/new')}/>}
-                pagination
-                paginationRowsPerPageOptions={[1, 2, 5]}
-                fixedHeader
-                customStyles={customStyles}
-                responsive
-            />
+            <>
+                <Head>
+                    <title>Students</title>
+                </Head>
+                <MyDataTable
+                    columns={columns}
+                    data={students}
+                    title="Students"
+                    onClick={e => Router.push(`/students/${e.id}`)}
+                    btnClick={() => Router.push('/students/new')}
+                />
+            </>
         )
     }
 

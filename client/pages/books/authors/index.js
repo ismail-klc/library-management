@@ -5,6 +5,8 @@ import buildClient from '../../../helpers/build-client';
 import withAuth from '../../../hocs/withAuth';
 import { customStyles } from '../../../styles/customStyles';
 import Router from 'next/router';
+import MyDataTable from '../../../components/my-table';
+import Head from 'next/head';
 
 const columns = [
     {
@@ -27,22 +29,18 @@ const columns = [
 function Authors({ authors }) {
     if (typeof window !== 'undefined') {
         return (
-            <DataTable
-                columns={columns}
-                data={authors}
-                title="Authors"
-                highlightOnHover
-                dense
-                subHeader
-                onRowClicked={e => Router.push(`/books/authors/${e.id}`)}
-                subHeaderAlign={Alignment.Left}
-                subHeaderComponent={<SubHeader onClick={() => Router.push('/books/authors/new')}/>}
-                pagination
-                paginationRowsPerPageOptions={[1, 2, 5]}
-                fixedHeader
-                customStyles={customStyles}
-                responsive
-            />
+            <>
+                <Head>
+                    <title>Authors</title>
+                </Head>
+                <MyDataTable
+                    columns={columns}
+                    data={authors}
+                    title="Authors"
+                    onClick={e => Router.push(`/books/authors/${e.id}`)}
+                    btnClick={() => Router.push('/books/authors/new')}
+                />
+            </>
         )
     }
 

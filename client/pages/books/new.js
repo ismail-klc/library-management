@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap'
 import Router from 'next/router';
 import useRequest from '../../hooks/use-request';
 import buildClient from '../../helpers/build-client';
+import Head from 'next/head';
 
 function NewBook({ authors, types }) {
     const [name, setName] = useState('')
@@ -26,55 +27,61 @@ function NewBook({ authors, types }) {
     }
 
     return (
-        <Form className="col-sm-6 mx-auto mt-5" onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" >
-                <Form.Label>Book Name</Form.Label>
-                <Form.Control
-                    value={name} onChange={e => setName(e.target.value)}
-                    type="text" placeholder="Enter a name" />
-            </Form.Group>
-            <Form.Group className="mb-3" >
-                <Form.Label>Page Number</Form.Label>
-                <Form.Control
-                    value={page} onChange={e => setPage(parseInt(e.target.value))}
-                    type="number" placeholder="Enter page number" />
-            </Form.Group>
-            <Form.Group className="mb-3" >
-                <Form.Label>Book Author</Form.Label>
-                <Form.Select
-                    value={authorId}
-                    onChange={e => setAuthorId(parseInt(e.target.value))}
-                    aria-label="Select an author">
-                    {
-                        authors.map(a => (
-                            <option
-                                key={a.id}
-                                value={parseInt(a.id)}>{`${a.firstName} ${a.lastName}`}
-                            </option>
-                        ))
-                    }
-                </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3" >
-                <Form.Label>Book Type</Form.Label>
-                <Form.Select
-                    value={typeId}
-                    onChange={e => setTypeId(parseInt(e.target.value))}
-                    aria-label="Select a type">
-                    {
-                        types.map(t => (
-                            <option
-                                key={t.id}
-                                value={parseInt(t.id)}>{`${t.name}`}
-                            </option>
-                        ))
-                    }
-                </Form.Select>
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+        <>
+            <Head>
+                <title>Add New Book</title>
+            </Head>
+            <Form className="col-sm-6 mx-auto my-5" onSubmit={handleSubmit}>
+                <h4 className="mb-3">Add New Book</h4>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Book Name</Form.Label>
+                    <Form.Control
+                        value={name} onChange={e => setName(e.target.value)}
+                        type="text" placeholder="Enter a name" />
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Page Number</Form.Label>
+                    <Form.Control
+                        value={page} onChange={e => setPage(parseInt(e.target.value))}
+                        type="number" placeholder="Enter page number" />
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Book Author</Form.Label>
+                    <Form.Select
+                        value={authorId}
+                        onChange={e => setAuthorId(parseInt(e.target.value))}
+                        aria-label="Select an author">
+                        {
+                            authors.map(a => (
+                                <option
+                                    key={a.id}
+                                    value={parseInt(a.id)}>{`${a.firstName} ${a.lastName}`}
+                                </option>
+                            ))
+                        }
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Book Type</Form.Label>
+                    <Form.Select
+                        value={typeId}
+                        onChange={e => setTypeId(parseInt(e.target.value))}
+                        aria-label="Select a type">
+                        {
+                            types.map(t => (
+                                <option
+                                    key={t.id}
+                                    value={parseInt(t.id)}>{`${t.name}`}
+                                </option>
+                            ))
+                        }
+                    </Form.Select>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+        </>
     )
 }
 

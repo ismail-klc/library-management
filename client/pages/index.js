@@ -1,8 +1,12 @@
+import Head from "next/head"
 import withAuth from "../hocs/withAuth"
 
 function Home({ user }) {
   return (
     <div className="mt-5">
+      <Head>
+        <title>Dashboard</title>
+      </Head>
       <div className="row">
         <div className="col-md-3">
           <div className="card-counter primary">

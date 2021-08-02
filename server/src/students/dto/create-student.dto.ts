@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsDateString, IsEnum, IsNotEmpty, IsNumberString } from "class-validator";
+import { IsDate, IsDateString, IsEmail, IsEnum, IsNotEmpty, IsNumberString } from "class-validator";
 import { Gender } from "../entities/student.entity";
 
 export class CreateStudentDto {
@@ -14,6 +14,10 @@ export class CreateStudentDto {
     @IsDateString()
     @ApiProperty()
     birthDate: Date;
+
+    @IsEmail()
+    @ApiProperty()
+    email: string;
 
     @IsNumberString()
     @ApiProperty()

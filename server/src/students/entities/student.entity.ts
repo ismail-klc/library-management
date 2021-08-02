@@ -20,6 +20,9 @@ export class Student {
     @Column()
     birthDate: Date;
 
+    @Column({ unique: true })
+    email: string;
+
     @Column()
     schoolNumber: string;
 

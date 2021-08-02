@@ -5,6 +5,8 @@ import { customStyles } from '../../styles/customStyles';
 import buildClient from '../../helpers/build-client'
 import { SubHeader } from '../../components/table-subheader';
 import Router from 'next/router';
+import MyDataTable from '../../components/my-table';
+import Head from 'next/head';
 
 const columns = [
     {
@@ -38,22 +40,18 @@ const columns = [
 function Books({ books }) {
     if (typeof window !== 'undefined') {
         return (
-            <DataTable
-                columns={columns}
-                data={books}
-                title="Books"
-                highlightOnHover
-                dense
-                subHeader
-                onRowClicked={e => Router.push(`/books/${e.id}`)}
-                subHeaderAlign={Alignment.Left}
-                subHeaderComponent={<SubHeader onClick={() => Router.push('/books/new')}/>}
-                fixedHeader
-                pagination
-                paginationRowsPerPageOptions={[1, 2, 5]}
-                customStyles={customStyles}
-                responsive
-            />
+            <>
+                <Head>
+                    <title>Books</title>
+                </Head>
+                <MyDataTable
+                    columns={columns}
+                    data={books}
+                    title="Books"
+                    onClick={e => Router.push(`/books/${e.id}`)}
+                    btnClick={() => Router.push('/books/new')}
+                />
+            </>
         )
     }
 
