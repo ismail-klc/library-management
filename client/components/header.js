@@ -24,8 +24,20 @@ function Header({ user }) {
               <a
                 className={`nav-link`} style={{ cursor: 'pointer' }}>Students</a>
             </Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-
+            <NavDropdown title={"Book"} id="collasible-nav-dropdown">
+              <Link href="/books">
+                <a
+                  className={`dropdown-item`} style={{ cursor: 'pointer' }}>Books</a>
+              </Link>
+              <Link href="/books/authors">
+                <a
+                  className={`dropdown-item`} style={{ cursor: 'pointer' }}>Authors</a>
+              </Link>
+              <Link href="/books/types">
+                <a
+                  className={`dropdown-item`} style={{ cursor: 'pointer' }}>Types</a>
+              </Link>
+            </NavDropdown>
           </Nav>
           <Nav>
             <NavDropdown title={user && user.email} id="collasible-nav-dropdown">

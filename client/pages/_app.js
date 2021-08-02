@@ -7,7 +7,9 @@ function MyApp({ Component, pageProps, user }) {
   return (
     <>
       <Header user={user} />
-      <Component {...pageProps} user={user}/>
+      <div className="container">
+        <Component user={user} {...pageProps} />
+      </div>
     </>
     )
 }
@@ -19,14 +21,14 @@ MyApp.getInitialProps = async (appContext) => {
   try {
     const { data } = await client.get('/api/auth/me');
     user = data;
-  } catch (error) {
-
-  }
-  console.log(user);
+  } catch (error) { }
 
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
-    pageProps = await appContext.Component.getInitialProps(appContext.ctx)
+    pageProps = await appContext.Component.getInitialProps(
+      appContext.ctx,
+      client,
+    );
   }
 
   return {
