@@ -58,10 +58,11 @@ export class BooksController {
         return this.bookService.createType(createTypeDto);
     }
 
+    @UseInterceptors(FileInterceptor("image", storage))
     @Post()
     @HttpCode(201)
-    createBook(@Body() createBookDto: CreateBookDto) {
-        return this.bookService.createBook(createBookDto);
+    createBook(@UploadedFile() file: Express.Multer.File, @Body() createBookDto: CreateBookDto) {
+        return this.bookService.createBook(createBookDto, file.filename);
     }
 
     @Get()

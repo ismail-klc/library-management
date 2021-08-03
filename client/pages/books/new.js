@@ -5,24 +5,40 @@ import Router from 'next/router';
 import useRequest from '../../hooks/use-request';
 import buildClient from '../../helpers/build-client';
 import Head from 'next/head';
+import FormData from 'form-data';
 
 function NewBook({ authors, types }) {
+    let formData = new FormData();
+
     const [name, setName] = useState('')
     const [page, setPage] = useState(0)
     const [authorId, setAuthorId] = useState(0)
     const [typeId, setTypeId] = useState(0)
+    const [stock, setStock] = useState(0)
+    const [description, setDescription] = useState('')
+    const [image, setImage] = useState(null)
 
     const { doRequest, errors } = useRequest({
         url: 'http://localhost:3000/api/books',
         method: 'post',
-        body: {
-            name, page, authorId: parseInt(authorId), typeId: parseInt(typeId)
+        body: formData,
+        headers: {
+            withCredentials: true
         },
         onSuccess: () => Router.push('/books')
     });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        image && formData.append('image', image, image.name)
+        formData.append('name', name)
+        formData.append('page', page)
+        formData.append('authorId', authorId)
+        formData.append('stock', stock)
+        formData.append('typeId', typeId)
+        formData.append('description', description)
+
         await doRequest();
     }
 
@@ -42,8 +58,20 @@ function NewBook({ authors, types }) {
                 <Form.Group className="mb-3" >
                     <Form.Label>Page Number</Form.Label>
                     <Form.Control
-                        value={page} onChange={e => setPage(parseInt(e.target.value))}
+                        value={page} onChange={e => setPage(e.target.value)}
                         type="number" placeholder="Enter page number" />
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                    <Form.Label>Stock</Form.Label>
+                    <Form.Control
+                        value={stock} onChange={e => setStock(e.target.value)}
+                        type="number" placeholder="Enter stock number" />
+                </Form.Group>
+                <Form.Group controlId="formFile" className="mb-3">
+                    <Form.Label>Book Image</Form.Label>
+                    <Form.Control
+                        onChange={e => setImage(e.target.files[0])}
+                        type="file" />
                 </Form.Group>
                 <Form.Group className="mb-3" >
                     <Form.Label>Book Author</Form.Label>
@@ -76,6 +104,16 @@ function NewBook({ authors, types }) {
                             ))
                         }
                     </Form.Select>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                        as="textarea"
+                        placeholder="Leave a description about the book"
+                        style={{ height: '100px' }}
+                    />
                 </Form.Group>
                 {
                     errors && errors

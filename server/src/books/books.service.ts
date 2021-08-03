@@ -41,7 +41,7 @@ export class BooksService {
         return this.typeRepository.find({ relations: ['books'] });
     }
 
-    async createBook(createBookDto: CreateBookDto) {
+    async createBook(createBookDto: CreateBookDto, fileName: string) {
         const author = await this.authorRepository.findOne({ id: createBookDto.authorId });
         const type = await this.typeRepository.findOne({ id: createBookDto.typeId });
         if (!author || !type) {
@@ -51,7 +51,10 @@ export class BooksService {
         return this.bookRepository.save({
             author, type,
             name: createBookDto.name,
-            page: createBookDto.page
+            page: createBookDto.page,
+            description: createBookDto.description,
+            image: fileName,
+            stock: createBookDto.stock
         });
     }
 

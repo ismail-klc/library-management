@@ -14,6 +14,7 @@ function NewAuthor() {
     const [lastName, setLastName] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState(null)
+    
     const { doRequest, errors } = useRequest({
         url: 'http://localhost:3000/api/books/authors',
         method: 'post',

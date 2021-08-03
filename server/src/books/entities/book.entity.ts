@@ -14,6 +14,15 @@ export class Book {
     @Column()
     page: number;
 
+    @Column()
+    stock: number;
+
+    @Column()
+    image: string;
+
+    @Column()
+    description: string;
+
     @ManyToOne(type => Author, author => author.books)
     author: Author;
 
