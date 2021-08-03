@@ -1,9 +1,6 @@
 import React from 'react'
 import withAuth from '../../hocs/withAuth'
-import DataTable, { Alignment } from 'react-data-table-component';
-import { customStyles } from '../../styles/customStyles';
 import buildClient from '../../helpers/build-client'
-import { SubHeader } from '../../components/table-subheader';
 import Router from 'next/router';
 import MyDataTable from '../../components/my-table';
 import Head from 'next/head';
@@ -22,6 +19,11 @@ const columns = [
     {
         name: 'Page',
         selector: row => row.page,
+        sortable: true,
+    },
+    {
+        name: 'Stock',
+        selector: row => row.stock,
         sortable: true,
     },
     {
