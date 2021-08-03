@@ -30,4 +30,6 @@ export class CreateStudentDto {
     @IsNotEmpty()
     @ApiProperty()
     class: string;
+
+    verifyCode: number;
 }

@@ -33,9 +33,15 @@ export class Student {
     @Column()
     class: string;
 
+    @Column()
+    verifyCode: number;
+
     @OneToMany(type => Borrow, type => type.student)
     borrows: Borrow[];
 
     @Column({ default: true })
     isActive: boolean;
+
+    @Column({ default: false })
+    isVerified: boolean;
 }
