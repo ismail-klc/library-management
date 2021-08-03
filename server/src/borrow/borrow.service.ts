@@ -26,6 +26,11 @@ export class BorrowService {
             throw new BadRequestException(['Wrong student or book']);
         }
 
+        // check if student is active and verified
+        if (!student.isActive || !student.isVerified) {
+            throw new BadRequestException(['Student account is not verified or not active']);
+        }
+
         // check if the book has already borrowed by the student
         const isBorrowed = await this.borrowRepository.findOne({ student, book });
         if (isBorrowed) {

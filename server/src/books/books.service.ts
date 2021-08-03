@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOneParams } from 'src/core/find-one.param';
 import { Repository } from 'typeorm';
@@ -62,7 +62,30 @@ export class BooksService {
         return this.bookRepository.find({ relations: ['author', 'type'] });
     }
 
-    getBookById(params: FindOneParams) {
-        return this.bookRepository.findOne(params.id, { relations: ['author', 'type'] });
+    async getBookById(params: FindOneParams) {
+        const book = await this.bookRepository.findOne(params.id, { relations: ['author', 'type'] })
+        if (!book) {
+            throw new NotFoundException('book not found');
+        }
+
+        return book;
+    }
+
+    async getAuthorById(params: FindOneParams) {
+        const author = await this.authorRepository.findOne(params.id)
+        if (!author) {
+            throw new NotFoundException('author not found');
+        }
+
+        return author;
+    }
+
+    async getTypeById(params: FindOneParams) {
+        const type = await this.typeRepository.findOne(params.id)
+        if (!type) {
+            throw new NotFoundException('type not found');
+        }
+
+        return type;
     }
 }

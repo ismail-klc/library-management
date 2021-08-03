@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import withAuth from '../../hocs/withAuth'
+import buildClient from '../../helpers/build-client'
 
 function BookDetail() {
     const router = useRouter()
@@ -11,6 +12,21 @@ function BookDetail() {
             { id }
         </div>
     )
+}
+
+export async function getServerSideProps(context) {
+    const client = buildClient(context);
+
+    try {
+        const { data } = await client.get(`/api/books/${context.params.id}`);
+
+        return { props: { data } };
+        
+    } catch (error) {
+        return {
+            notFound: true,
+        }
+    }
 }
 
 export default withAuth(BookDetail)

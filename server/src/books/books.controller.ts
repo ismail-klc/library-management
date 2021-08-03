@@ -76,4 +76,16 @@ export class BooksController {
     getBook(@Param() id: FindOneParams) {
         return this.bookService.getBookById(id);
     }
+
+    @Get('authors/:id')
+    @HttpCode(200)
+    getAuthor(@Param() id: FindOneParams) {
+        return this.bookService.getAuthorById(id);
+    }
+
+    @Get('types/:id')
+    @HttpCode(200)
+    getType(@Param() id: FindOneParams) {
+        return this.bookService.getTypeById(id);
+    }
 }

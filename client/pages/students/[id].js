@@ -25,7 +25,7 @@ function StudentDetail({ data }) {
         await doRequest();
     }
 
-    if (!data.isVerified) {
+    if (data && !data.isVerified) {
         return (
             <>
                 <Head>
@@ -52,7 +52,7 @@ function StudentDetail({ data }) {
 
     return (
         <div className="text-center mt-5">
-            { data.email } is verified
+            {data && data.email} is verified
         </div>
     )
 }
@@ -63,13 +63,13 @@ export async function getServerSideProps(context) {
 
     try {
         const { data } = await client.get(`/api/students/${context.params.id}`);
-        console.log('====================================');
-        console.log(data);
-        console.log('====================================');
-        return { props: { data } };
 
+        return { props: { data } };
+        
     } catch (error) {
-        return { props: {} };
+        return {
+            notFound: true,
+        }
     }
 }
 
