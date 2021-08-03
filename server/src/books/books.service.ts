@@ -20,8 +20,13 @@ export class BooksService {
         private bookRepository: Repository<Book>,
     ) { }
 
-    createAuthor(createAuthorDto: CreateAuthorDto) {
-        return this.authorRepository.save(createAuthorDto);
+    createAuthor(createAuthorDto: CreateAuthorDto, fileName: string) {
+        return this.authorRepository.save({
+            firstName: createAuthorDto.firstName,
+            lastName: createAuthorDto.lastName,
+            description: createAuthorDto.description,
+            image: fileName,
+        });
     }
 
     getAuthors() {

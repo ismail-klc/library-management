@@ -6,6 +6,7 @@ import { StudentsModule } from './students/students.module';
 import { CoreModule } from './core/core.module';
 import { BooksModule } from './books/books.module';
 import { BorrowModule } from './borrow/borrow.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [

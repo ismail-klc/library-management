@@ -9,4 +9,8 @@ export class CreateAuthorDto {
     @IsNotEmpty()
     @ApiProperty()
     lastName: string;
+
+    @IsNotEmpty()
+    @ApiProperty()
+    description: string;
 }

@@ -2,13 +2,30 @@ import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { BooksService } from './books.service';
 import {
-    Controller, Get, Post, Body, HttpCode, Res, UseGuards, Req, Param,
+    Controller, Get, Post, Body, HttpCode, Res, UseGuards, Req, Param, UploadedFile, UseInterceptors,
 } from '@nestjs/common';
-import { Response, Request } from 'express';
+import { Express, Request } from 'express';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { CreateTypeDto } from './dto/create-type.dto';
 import { CreateBookDto } from './dto/create-book.dto';
 import { FindOneParams } from 'src/core/find-one.param';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import path = require('path');
+import { v4 as uuidv4 } from 'uuid';
+
+export const storage = {
+    storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+            const filename: string = path.parse(file.originalname).name.replace(/\s/g, '') + uuidv4();
+            const extension: string = path.parse(file.originalname).ext;
+
+            cb(null, `${filename}${extension}`)
+        }
+    })
+
+}
 
 @ApiTags('books')
 @Controller('books')
@@ -18,14 +35,15 @@ export class BooksController {
 
     @Get('authors')
     @HttpCode(200)
-    getAuthors(@Req() req: Request) {
+    getAuthors() {
         return this.bookService.getAuthors();
     }
 
+    @UseInterceptors(FileInterceptor("image", storage))
     @Post('authors')
     @HttpCode(201)
-    createAuthor(@Body() createAuthorDto: CreateAuthorDto) {
-        return this.bookService.createAuthor(createAuthorDto);
+    createAuthor( @UploadedFile() file: Express.Multer.File, @Body() createAuthorDto: CreateAuthorDto) {
+        return this.bookService.createAuthor(createAuthorDto, file.filename);
     }
 
     @Get('types')

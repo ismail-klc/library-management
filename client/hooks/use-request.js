@@ -1,12 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
 
-const useRequest = ({ url, method, body, onSuccess }) => {
+const useRequest = ({ url, method, body, onSuccess, headers }) => {
     const [errors, setErrors] = useState(null);
 
     const doRequest = async () => {
         try {
-            const res = await axios[method](url, body, { withCredentials: true });
+            const res = await axios[method](
+                url, 
+                body, 
+                headers ? headers : { withCredentials: true });
+
             setErrors(null);
 
             if (onSuccess) {
@@ -14,11 +18,13 @@ const useRequest = ({ url, method, body, onSuccess }) => {
             }
             return res.data;
         } catch (error) {
-            console.log(error.response);
+            const msg = typeof error.response.data.message === 'string'
+                ? [error.response.data.message]
+                : [...error.response.data.message]
             setErrors(
                 <div className="alert alert-danger mt-3" role="alert">
                     {
-                        error.response.data.message.map((err, index) => (
+                        msg.map((err, index) => (
                             <div key={index}>{err}</div>
                         ))
                     }
