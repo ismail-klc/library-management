@@ -5,6 +5,7 @@ import { Queue } from 'bull';
 import { FindOneParams } from 'src/core/find-one.param';
 import { Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/create-student.dto';
+import { VerifyStudentDto } from './dto/verify-student.dto';
 import { Student } from './entities/student.entity';
 
 @Injectable()
@@ -41,5 +42,24 @@ export class StudentsService {
         }
 
         return student;
+    }
+
+    async verifyStudent(verifyStudentDto: VerifyStudentDto){
+        const student = await this.studentRepository.findOne({ id: verifyStudentDto.id });
+        if (!student) {
+            throw new BadRequestException(['student not found']);
+        }
+
+        if (student.isVerified) {
+            throw new BadRequestException(['student is already verified']);
+        }
+
+        if (student.verifyCode !== verifyStudentDto.code) {
+            throw new BadRequestException(['wrong verify code']);
+        }
+
+        student.isVerified = true
+        student.verifyCode = 0
+        return this.studentRepository.save(student);
     }
 }

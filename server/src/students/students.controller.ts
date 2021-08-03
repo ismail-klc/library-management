@@ -6,6 +6,7 @@ import { Response, Request } from 'express';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { FindOneParams } from 'src/core/find-one.param';
 import { CreateStudentDto } from './dto/create-student.dto';
+import { VerifyStudentDto } from './dto/verify-student.dto';
 import { StudentsService } from './students.service';
 
 @ApiTags('students')
@@ -29,5 +30,11 @@ export class StudentsController {
     @Get(':id')
     getStudentById(@Param() id: FindOneParams){
         return this.studentService.getById(id);
+    }
+
+    @Post('verify')
+    @HttpCode(200)
+    verifyStudent( @Body() verifyStudentDto: VerifyStudentDto) {
+        return this.studentService.verifyStudent(verifyStudentDto);
     }
 }

@@ -7,6 +7,7 @@ import { SubHeader } from '../../components/table-subheader';
 import Router from 'next/router';
 import MyDataTable from '../../components/my-table';
 import Head from 'next/head';
+import { Badge } from 'react-bootstrap';
 
 const columns = [
     {
@@ -37,6 +38,13 @@ const columns = [
     {
         name: 'School No',
         selector: row => row.schoolNumber,
+        sortable: true,
+    },
+    {
+        name: 'Is Verified',
+        selector: row => row.isVerified
+            ? <Badge pill bg="success" >&nbsp;&nbsp;&nbsp;</Badge>
+            : <Badge pill bg="danger" >&nbsp;&nbsp;&nbsp;</Badge>,
         sortable: true,
     },
 ];
