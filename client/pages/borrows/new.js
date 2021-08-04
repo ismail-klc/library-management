@@ -5,6 +5,7 @@ import Router from 'next/router';
 import useRequest from '../../hooks/use-request';
 import Head from 'next/head';
 import buildClient from '../../helpers/build-client';
+import ContentHeader from '../../components/content-header';
 
 function NewBorrow({ books, students }) {
     const [studentId, setStudentId] = useState(0)
@@ -30,57 +31,65 @@ function NewBorrow({ books, students }) {
             <Head>
                 <title>Add New Borrow</title>
             </Head>
-            <Form className="col-sm-6 mx-auto my-5" onSubmit={handleSubmit}>
-                <h4 className="mb-3">Add New Borrow</h4>
-                <Form.Group className="mb-3" >
-                    <Form.Label>Student</Form.Label>
-                    <Form.Select
-                        value={studentId}
-                        onChange={e => setStudentId(e.target.value)}
-                        aria-label="Select a student">
-                            <option
-                            value={0}>
-                                {`Select a student`}
-                        </option>
-                        {
-                            students.map(a => (
+            <ContentHeader title="Add New Borrow">
+                <li className="breadcrumb-item"><a href="#">Home</a></li>
+                <li className="breadcrumb-item active">Borrows </li>
+                <li className="breadcrumb-item active">New </li>
+            </ContentHeader>
+            <section className="content">
+                <div className="container-fluid">
+                    <Form className="col-sm-6 mx-auto" onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" >
+                            <Form.Label>Student</Form.Label>
+                            <Form.Select
+                                value={studentId}
+                                onChange={e => setStudentId(e.target.value)}
+                                aria-label="Select a student">
                                 <option
-                                    key={a.id}
-                                    value={a.id}>
-                                    {`${a.firstName} ${a.lastName}`}
+                                    value={0}>
+                                    {`Select a student`}
                                 </option>
-                            ))
-                        }
-                    </Form.Select>
-                </Form.Group>
-                <Form.Group className="mb-3" >
-                    <Form.Label>Book</Form.Label>
-                    <Form.Select
-                        value={bookId}
-                        onChange={e => setBookId(e.target.value)}
-                        aria-label="Select a book">
-                        <option
-                            value={0}>
-                                {`Select a book`}
-                        </option>
-                        {
-                            books.map(t => (
+                                {
+                                    students.map(a => (
+                                        <option
+                                            key={a.id}
+                                            value={a.id}>
+                                            {`${a.firstName} ${a.lastName}`}
+                                        </option>
+                                    ))
+                                }
+                            </Form.Select>
+                        </Form.Group>
+                        <Form.Group className="mb-3" >
+                            <Form.Label>Book</Form.Label>
+                            <Form.Select
+                                value={bookId}
+                                onChange={e => setBookId(e.target.value)}
+                                aria-label="Select a book">
                                 <option
-                                    key={t.id}
-                                    value={t.id}>
-                                    {`${t.name}`}
+                                    value={0}>
+                                    {`Select a book`}
                                 </option>
-                            ))
+                                {
+                                    books.map(t => (
+                                        <option
+                                            key={t.id}
+                                            value={t.id}>
+                                            {`${t.name}`}
+                                        </option>
+                                    ))
+                                }
+                            </Form.Select>
+                        </Form.Group>
+                        {
+                            errors && errors
                         }
-                    </Form.Select>
-                </Form.Group>
-                {
-                    errors && errors
-                }
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                </div>
+            </section>
         </>
     )
 }

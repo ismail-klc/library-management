@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 function MainSidebar() {
@@ -9,31 +10,57 @@ function MainSidebar() {
             <div className="sidebar">
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li className="nav-header ml-2">MAIN</li>
                         <li className="nav-item">
-                            <a href="pages/widgets.html" className="nav-link">
-                                <i className="nav-icon fas fa-th"></i>
-                                <p>
-                                    Widgets
-                                    <span className="right badge badge-danger">New</span>
-                                </p>
-                            </a>
+                            <Link href="/students" >
+                                <a className="nav-link">
+                                    <i className="nav-icon fas fa-user-graduate"></i>
+                                    <p>
+                                        Students
+                                    </p>
+                                </a>
+                            </Link>
                         </li>
-                        <li className="nav-header">EXAMPLES</li>
                         <li className="nav-item">
-                            <a href="pages/calendar.html" className="nav-link">
-                                <i className="nav-icon far fa-calendar-alt"></i>
-                                <p>
-                                    Calendar
-                                    <span className="badge badge-info right">2</span>
-                                </p>
-                            </a>
+                            <Link href="/books" >
+                                <a className="nav-link">
+                                    <i className="nav-icon fas fa-book"></i>
+                                    <p>
+                                        Books
+                                    </p>
+                                </a>
+                            </Link>
                         </li>
-                        <li className="nav-header">MISCELLANEOUS</li>
                         <li className="nav-item">
-                            <a href="https://adminlte.io/docs/3.0" className="nav-link">
-                                <i className="nav-icon fas fa-file"></i>
-                                <p>Documentation</p>
-                            </a>
+                            <Link href="/borrows" >
+                                <a className="nav-link">
+                                    <i className="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Borrows
+                                    </p>
+                                </a>
+                            </Link>
+                        </li>
+                        <li className="nav-header">BOOK</li>
+                        <li className="nav-item">
+                            <Link href="/books/authors" >
+                                <a className="nav-link">
+                                    <i className="nav-icon fas fa-pen"></i>
+                                    <p>
+                                        Authors
+                                    </p>
+                                </a>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link href="/books/types" >
+                                <a className="nav-link">
+                                    <i className="nav-icon fas fa-align-justify"></i>
+                                    <p>
+                                        Types
+                                    </p>
+                                </a>
+                            </Link>
                         </li>
                     </ul>
                 </nav>

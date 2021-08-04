@@ -3,6 +3,7 @@ import Router from 'next/router';
 import { useRouter } from 'next/router';
 import React from 'react'
 import DataTable, { Alignment } from 'react-data-table-component';
+import ContentHeader from '../../../components/content-header';
 import MyDataTable from '../../../components/my-table';
 import { SubHeader } from '../../../components/table-subheader';
 import buildClient from '../../../helpers/build-client';
@@ -30,13 +31,21 @@ function Types({ types }) {
                 <Head>
                     <title>Types</title>
                 </Head>
-                <MyDataTable
-                    columns={columns}
-                    data={types}
-                    title="Types"
-                    onClick={e => Router.push(`/books/types/${e.id}`)}
-                    btnClick={() => Router.push('/books/types/new')}
-                />
+                <ContentHeader title="Types">
+                    <li className="breadcrumb-item"><a href="#">Home</a></li>
+                    <li className="breadcrumb-item active">Books</li>
+                    <li className="breadcrumb-item active">Types</li>
+                </ContentHeader>
+                <section className="content">
+                    <div className="container-fluid">
+                        <MyDataTable
+                            columns={columns}
+                            data={types}
+                            onClick={e => Router.push(`/books/types/${e.id}`)}
+                            btnClick={() => Router.push('/books/types/new')}
+                        />
+                    </div>
+                </section>
             </>
         )
     }

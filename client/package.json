@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "luxon": "^2.0.1",

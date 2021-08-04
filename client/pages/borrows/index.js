@@ -7,6 +7,7 @@ import buildClient from '../../helpers/build-client';
 import withAuth from '../../hocs/withAuth'
 import BorrowComplete from '../../components/borrow-complete';
 import { DateTime } from "luxon";
+import ContentHeader from '../../components/content-header';
 
 const columns = [
     {
@@ -62,13 +63,21 @@ function Borrows({ data }) {
                 <Head>
                     <title>Borrows</title>
                 </Head>
-                <MyDataTable
-                    columns={columns}
-                    data={borrows}
-                    title="Borrows"
-                    // onClick={e => Router.push(`/students/${e.id}`)}
-                    btnClick={() => Router.push('/borrows/new')}
-                />
+                <ContentHeader title="Borrows">
+                    <li className="breadcrumb-item"><a href="#">Home</a></li>
+                    <li className="breadcrumb-item active">Borrows </li>
+                </ContentHeader>
+                <section className="content">
+                    <div className="container-fluid">
+                        <MyDataTable
+                            columns={columns}
+                            data={borrows}
+                            title="Borrows"
+                            // onClick={e => Router.push(`/students/${e.id}`)}
+                            btnClick={() => Router.push('/borrows/new')}
+                        />
+                    </div>
+                </section>
             </>
         )
     }

@@ -4,13 +4,13 @@ import { customStyles } from '../styles/customStyles'
 import { SubHeader } from './table-subheader'
 
 function MyDataTable({
-    columns, data, title, onClick, btnClick
+    columns, data, onClick, btnClick
 }) {
     return (
         <DataTable
             columns={columns}
             data={data}
-            title={title}
+            title={` `}
             highlightOnHover
             dense
             subHeader

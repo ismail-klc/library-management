@@ -7,6 +7,7 @@ import { customStyles } from '../../../styles/customStyles';
 import Router from 'next/router';
 import MyDataTable from '../../../components/my-table';
 import Head from 'next/head';
+import ContentHeader from '../../../components/content-header';
 
 const columns = [
     {
@@ -33,13 +34,21 @@ function Authors({ authors }) {
                 <Head>
                     <title>Authors</title>
                 </Head>
-                <MyDataTable
-                    columns={columns}
-                    data={authors}
-                    title="Authors"
-                    onClick={e => Router.push(`/books/authors/${e.id}`)}
-                    btnClick={() => Router.push('/books/authors/new')}
-                />
+                <ContentHeader title="Authors">
+                    <li className="breadcrumb-item"><a href="#">Home</a></li>
+                    <li className="breadcrumb-item active">Books</li>
+                    <li className="breadcrumb-item active">Authors</li>
+                </ContentHeader>
+                <section className="content">
+                    <div className="container-fluid">
+                        <MyDataTable
+                            columns={columns}
+                            data={authors}
+                            onClick={e => Router.push(`/books/authors/${e.id}`)}
+                            btnClick={() => Router.push('/books/authors/new')}
+                        />
+                    </div>
+                </section>
             </>
         )
     }

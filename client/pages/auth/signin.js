@@ -24,7 +24,10 @@ function Signin() {
     }
 
     return (
-        <div className="container">
+        <div>
+            <Head>
+                <title>Sign In</title>
+            </Head>
             <div className="row">
                 <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div className="card border-0 shadow rounded-3 my-5">
@@ -67,7 +70,6 @@ function Signin() {
                 </div>
             </div>
         </div>
-
     )
 }
 

@@ -6,7 +6,12 @@ import withAuth from "../hocs/withAuth"
 function Home({ user }) {
   return (
     <>
-      <ContentHeader />
+      <Head>
+        <title>Dashboard</title>
+      </Head>
+      <ContentHeader title="Dashboard">
+        <li className="breadcrumb-item"><a href="#">Home</a></li>
+      </ContentHeader>
       <section className="content">
         <div className="container-fluid">
           <DashboardCart />

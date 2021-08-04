@@ -4,6 +4,7 @@ import buildClient from '../../helpers/build-client'
 import Router from 'next/router';
 import MyDataTable from '../../components/my-table';
 import Head from 'next/head';
+import ContentHeader from '../../components/content-header';
 
 const columns = [
     {
@@ -42,17 +43,24 @@ const columns = [
 function Books({ books }) {
     if (typeof window !== 'undefined') {
         return (
-            <>
+            <> 
                 <Head>
                     <title>Books</title>
                 </Head>
-                <MyDataTable
-                    columns={columns}
-                    data={books}
-                    title="Books"
-                    onClick={e => Router.push(`/books/${e.id}`)}
-                    btnClick={() => Router.push('/books/new')}
-                />
+                <ContentHeader title="Books">
+                    <li className="breadcrumb-item"><a href="#">Home</a></li>
+                    <li className="breadcrumb-item active">Books</li>
+                </ContentHeader>
+                <section className="content">
+                    <div className="container-fluid">
+                        <MyDataTable
+                            columns={columns}
+                            data={books}
+                            onClick={e => Router.push(`/books/${e.id}`)}
+                            btnClick={() => Router.push('/books/new')}
+                        />
+                    </div>
+                </section>
             </>
         )
     }
