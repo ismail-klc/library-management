@@ -1,5 +1,7 @@
+import Head from 'next/head'
 import Router from 'next/router'
 import React, { useEffect } from 'react'
+import ContentHeader from '../../components/content-header'
 import useRequest from '../../hooks/use-request'
 
 function Signout() {
@@ -15,9 +17,18 @@ function Signout() {
     }, [])
 
     return (
-        <div className="container mt-5 text-center">
-            Signing you out...
-        </div>
+        <>
+            <Head>
+                <title>Signing out</title>
+            </Head>
+            <ContentHeader>
+            </ContentHeader>
+            <section className="content">
+                <div className="container-fluid text-center mt-5">
+                    Signing you out ...
+                </div>
+            </section>
+        </>
     )
 }
 

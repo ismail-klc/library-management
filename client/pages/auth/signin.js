@@ -29,8 +29,8 @@ function Signin() {
             <Head>
                 <title>Sign In</title>
             </Head>
-            <div className="row">
-                <div className="col-sm-9 col-md-7 col-lg-5 col-10 mx-auto">
+            <div className="row mx-auto">
+                <div className="col-sm-8 col-md-8 col-lg-6 col-10 col-xl-4 mx-auto">
                     <div className="card border-0 shadow rounded-3 my-5">
                         <div className="card-body p-4 p-sm-5">
                             <h3 className="text-center">Sign In</h3>

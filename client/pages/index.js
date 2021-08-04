@@ -3,8 +3,10 @@ import ContentHeader from "../components/content-header"
 import DashboardCart from "../components/dashboard-cart"
 import withAuth from "../hocs/withAuth"
 import buildClient from '../helpers/build-client'
+import { Row } from 'react-bootstrap'
+import BookCard from "../components/book-card"
 
-function Home({ data }) {
+function Home({ data, books }) {
   console.log(data);
   return (
     <>
@@ -17,6 +19,14 @@ function Home({ data }) {
       <section className="content">
         <div className="container-fluid">
           <DashboardCart data={data} />
+          <h3>Latest Books</h3>
+          <Row>
+            {
+              books.map(b => (
+                <BookCard key={b.id} book={b} />
+              ))
+            }
+          </Row>
         </div>
       </section>
     </>
@@ -34,15 +44,17 @@ export async function getServerSideProps(context) {
     const borrowCount = res.data
 
     res = await client.get('/api/books/count');
-    console.log(res.data);
     const bookCount = res.data.bookCount
     const authorCount = res.data.authorCount
-    const typeCount = res.data.typeCount
+
+    res = await client.get('/api/books/latests');
+    const books = res.data
 
     const data = {
-      studentCount, borrowCount, bookCount, authorCount, typeCount
+      studentCount, borrowCount, bookCount, authorCount
     }
-    return { props: { data } };
+
+    return { props: { data, books } };
 
   } catch (error) {
     return { props: {} };

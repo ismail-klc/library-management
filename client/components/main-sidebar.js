@@ -1,12 +1,26 @@
 import Link from 'next/link'
 import React from 'react'
 
-function MainSidebar() {
+function MainSidebar({ user }) {
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="index3.html" className="brand-link">
-                <span className="brand-text font-weight-light ml-4">LMS</span>
-            </a>
+            <Link href="/">
+                <a className="brand-link">
+                    <span className="brand-text font-weight-light ml-4">
+                        <b>LMS</b>
+                    </span>
+                </a>
+            </Link>
+            <div className="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div className="image">
+                    <img src="/img/user.jpg" className="img-circle elevation-2" alt="User Image" />
+                </div>
+                <div className="info">
+                    <span
+                    style={{color: '#fff'}}
+                    className="d-block">{user.email}</span>
+                </div>
+            </div>
             <div className="sidebar">
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

@@ -71,6 +71,12 @@ export class BooksController {
         return this.bookService.getBooks();
     }
 
+    @Get('latests')
+    @HttpCode(200)
+    getLatests() {
+        return this.bookService.getLastBooks();
+    }
+
     @Get('count')
     @HttpCode(200)
     getCount() {

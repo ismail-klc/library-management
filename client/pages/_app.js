@@ -8,6 +8,7 @@ import Head from 'next/head';
 import Navbar from '../components/navbar';
 import MainSidebar from '../components/main-sidebar';
 import Footer from '../components/footer';
+import Script from 'next/script'
 
 function MyApp({ Component, pageProps, user }) {
   return (
@@ -18,10 +19,10 @@ function MyApp({ Component, pageProps, user }) {
       {
         user ?
           <>
-            <Navbar />
-            <MainSidebar />
             <div className="wrapper">
-              <div className="content-wrapper">
+              <Navbar />
+              <MainSidebar user={user} />
+              <div className="content-wrapper pb-5">
                 <Component user={user} {...pageProps} />
               </div>
             </div>
@@ -30,6 +31,8 @@ function MyApp({ Component, pageProps, user }) {
           :
           <Component user={user} {...pageProps} />
       }
+      <Script strategy="beforeInteractive" src="/js/jquery.min.js" />
+      <Script strategy="beforeInteractive" src="/js/adminlte.min.js" />
     </>
   )
 }

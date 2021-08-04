@@ -89,7 +89,7 @@ export class BooksService {
         return type;
     }
 
-    async getCount(){
+    async getCount() {
         const typeCount = await this.typeRepository.count();
         const bookCount = await this.bookRepository.count();
         const authorCount = await this.authorRepository.count();
@@ -97,6 +97,17 @@ export class BooksService {
         return {
             typeCount, bookCount, authorCount
         }
+    }
+
+    async getLastBooks() {
+        const books = await this.bookRepository.createQueryBuilder('book')
+            .orderBy('book.id', 'DESC')
+            .leftJoinAndSelect("book.author", "author")
+            .leftJoinAndSelect("book.type", "type")
+            .limit(4)
+            .getMany();
+
+        return books;
     }
 
 }
