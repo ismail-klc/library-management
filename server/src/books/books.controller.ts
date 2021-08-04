@@ -71,6 +71,12 @@ export class BooksController {
         return this.bookService.getBooks();
     }
 
+    @Get('count')
+    @HttpCode(200)
+    getCount() {
+        return this.bookService.getCount();
+    }
+
     @Get(':id')
     @HttpCode(200)
     getBook(@Param() id: FindOneParams) {

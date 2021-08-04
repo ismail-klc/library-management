@@ -88,4 +88,15 @@ export class BooksService {
 
         return type;
     }
+
+    async getCount(){
+        const typeCount = await this.typeRepository.count();
+        const bookCount = await this.bookRepository.count();
+        const authorCount = await this.authorRepository.count();
+
+        return {
+            typeCount, bookCount, authorCount
+        }
+    }
+
 }

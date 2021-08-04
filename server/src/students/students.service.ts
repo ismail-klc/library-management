@@ -62,4 +62,9 @@ export class StudentsService {
         student.verifyCode = 0
         return this.studentRepository.save(student);
     }
+
+    async getCount(){
+        const studentCount = await this.studentRepository.count();
+        return studentCount;
+    }
 }

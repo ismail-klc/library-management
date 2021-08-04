@@ -21,6 +21,12 @@ export class StudentsController {
         return this.studentService.getStudents();
     }
 
+    @Get('count')
+    @HttpCode(200)
+    getCount() {
+        return this.studentService.getCount();
+    }
+
     @Post()
     @HttpCode(201)
     createStudent(@Body() createStudentDto: CreateStudentDto) {
@@ -37,4 +43,6 @@ export class StudentsController {
     verifyStudent( @Body() verifyStudentDto: VerifyStudentDto) {
         return this.studentService.verifyStudent(verifyStudentDto);
     }
+
+
 }

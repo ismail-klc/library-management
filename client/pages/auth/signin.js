@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import React, { useState } from 'react';
 import useRequest from '../../hooks/use-request';
+import { Form, Button } from 'react-bootstrap';
 
 function Signin() {
     const [email, setEmail] = useState('');
@@ -29,42 +30,35 @@ function Signin() {
                 <title>Sign In</title>
             </Head>
             <div className="row">
-                <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div className="col-sm-9 col-md-7 col-lg-5 col-10 mx-auto">
                     <div className="card border-0 shadow rounded-3 my-5">
                         <div className="card-body p-4 p-sm-5">
-                            <h5 className="card-title text-center mb-5 fw-light fs-5">Sign In</h5>
-                            <form onSubmit={handleSubmit}>
-                                <div className="form-floating mb-3">
-                                    <input
-                                        required value={email} onChange={e => setEmail(e.target.value)}
-                                        type="email" className="form-control" placeholder="name@example.com" />
-                                    <label htmlFor="floatingInput">Email address</label>
-                                </div>
-                                <div className="form-floating mb-3">
-                                    <input
+                            <h3 className="text-center">Sign In</h3>
+                            <Form className="mx-auto mt-5" onSubmit={handleSubmit}>
+                                <Form.Group className="mb-3" >
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control
+                                        value={email} onChange={e => setEmail(e.target.value)}
+                                        type="email" placeholder="Enter a type name" />
+                                </Form.Group>
+                                <Form.Group className="mb-3" >
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control
                                         value={password} onChange={e => setPassword(e.target.value)}
-                                        type="password" className="form-control" placeholder="Password" />
-                                    <label htmlFor="floatingPassword">Password</label>
-                                </div>
-
-                                <div className="form-check mb-3">
-                                    <input className="form-check-input" type="checkbox" value="" id="rememberPasswordCheck" />
-                                    <label className="form-check-label" htmlFor="rememberPasswordCheck">
-                                        Remember password
-                                    </label>
-                                </div>
+                                        type="password" placeholder="Enter a type name" />
+                                </Form.Group>
                                 {
-                                    errors
+                                    errors && errors
                                 }
                                 <div className="d-grid">
                                     <button className="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign
                                         in</button>
                                 </div>
-                                <hr className="my-4" />
-                                <div className="text-center">
-                                    <Link href="/auth/signup">Create an account</Link>
-                                </div>
-                            </form>
+                            </Form>
+                            <hr className="my-4" />
+                            <div className="text-center">
+                                <Link href="/auth/signup">Create an account</Link>
+                            </div>
                         </div>
                     </div>
                 </div>

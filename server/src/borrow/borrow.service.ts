@@ -90,4 +90,9 @@ export class BorrowService {
         borrow.isCompleted = true;
         return this.borrowRepository.save(borrow);
     }
+
+    async getCount(){
+        const borrowCount = await this.borrowRepository.count();
+        return borrowCount;
+    }
 }

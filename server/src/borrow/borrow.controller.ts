@@ -20,6 +20,12 @@ export class BorrowController {
         return this.borrowService.createBorrow(createBorrowDto);
     }
 
+    @Get('count')
+    @HttpCode(200)
+    getCount() {
+        return this.borrowService.getCount();
+    }
+
     @Get()
     @HttpCode(200)
     getBorrows() {
