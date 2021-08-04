@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOneParams } from 'src/core/find-one.param';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { CreateBookDto } from './dto/create-book.dto';
 import { CreateTypeDto } from './dto/create-type.dto';
@@ -106,6 +106,14 @@ export class BooksService {
             .leftJoinAndSelect("book.type", "type")
             .limit(4)
             .getMany();
+
+        return books;
+    }
+
+    async searchBooks(param: string){
+        const books = await this.bookRepository.createQueryBuilder()
+        .where("LOWER(name) LIKE :name", { name: `%${ param.toLowerCase() }%` })
+        .getMany();
 
         return books;
     }

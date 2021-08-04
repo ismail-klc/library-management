@@ -1,7 +1,17 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
+import Router from 'next/router'
 
 function Navbar() {
+  const [name, setName] = useState('')
+
+  const handleSearch = async (e) => {
+    e.preventDefault()
+
+    Router.push(`/books?name=${name}`)
+    setName('')
+  }
+
   return (
     <nav className="main-header navbar navbar-expand navbar-white navbar-light">
       <ul className="navbar-nav">
@@ -16,9 +26,11 @@ function Navbar() {
         </li>
       </ul>
 
-      <form className="form-inline ml-3">
+      <form className="form-inline ml-3" onSubmit={handleSearch}>
         <div className="input-group input-group-sm">
-          <input className="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" />
+          <input 
+          value={name} onChange={e => setName(e.target.value)}
+          className="form-control form-control-navbar" type="search" placeholder="Search Book By Name" aria-label="Search" />
           <div className="input-group-append">
             <button className="btn btn-navbar" type="submit">
               <i className="fas fa-search"></i>

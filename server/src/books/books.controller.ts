@@ -2,7 +2,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { BooksService } from './books.service';
 import {
-    Controller, Get, Post, Body, HttpCode, Res, UseGuards, Req, Param, UploadedFile, UseInterceptors,
+    Controller, Get, Post, Body, HttpCode, Res, UseGuards, Req, Param, UploadedFile, UseInterceptors, Query,
 } from '@nestjs/common';
 import { Express, Request } from 'express';
 import { CreateAuthorDto } from './dto/create-author.dto';
@@ -42,7 +42,7 @@ export class BooksController {
     @UseInterceptors(FileInterceptor("image", storage))
     @Post('authors')
     @HttpCode(201)
-    createAuthor( @UploadedFile() file: Express.Multer.File, @Body() createAuthorDto: CreateAuthorDto) {
+    createAuthor(@UploadedFile() file: Express.Multer.File, @Body() createAuthorDto: CreateAuthorDto) {
         return this.bookService.createAuthor(createAuthorDto, file.filename);
     }
 
@@ -67,9 +67,13 @@ export class BooksController {
 
     @Get()
     @HttpCode(200)
-    getBooks() {
+    getBooks(@Query('name') name) {
+        if (name) {
+            return this.bookService.searchBooks(name);
+        }
         return this.bookService.getBooks();
     }
+
 
     @Get('latests')
     @HttpCode(200)

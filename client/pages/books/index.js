@@ -5,6 +5,8 @@ import Router from 'next/router';
 import MyDataTable from '../../components/my-table';
 import Head from 'next/head';
 import ContentHeader from '../../components/content-header';
+import { Row } from 'react-bootstrap';
+import BookCard from '../../components/book-card';
 
 const columns = [
     {
@@ -40,41 +42,55 @@ const columns = [
 ];
 
 
-function Books({ books }) {
-    if (typeof window !== 'undefined') {
-        return (
-            <> 
-                <Head>
-                    <title>Books</title>
-                </Head>
-                <ContentHeader title="Books">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item active">Books</li>
-                </ContentHeader>
-                <section className="content">
-                    <div className="container-fluid">
-                        <MyDataTable
-                            columns={columns}
-                            data={books}
-                            onClick={e => Router.push(`/books/${e.id}`)}
-                            btnClick={() => Router.push('/books/new')}
-                        />
-                    </div>
-                </section>
-            </>
-        )
-    }
+function Books({ books, isSearch }) {
+    return (
+        <>
+            <Head>
+                <title>Books</title>
+            </Head>
+            <ContentHeader title="Books">
+                <li className="breadcrumb-item"><a href="#">Home</a></li>
+                <li className="breadcrumb-item active">Books</li>
+            </ContentHeader>
+            <section className="content">
+                <div className="container-fluid">
+                    {
+                        !isSearch ?
+                            <MyDataTable
+                                columns={columns}
+                                data={books}
+                                onClick={e => Router.push(`/books/${e.id}`)}
+                                btnClick={() => Router.push('/books/new')}
+                            /> :
+                            <div>
+                                <Row>
+                                    {
+                                        books.map(b => (
+                                            <BookCard key={b.id} book={b} />
+                                        ))
+                                    }
+                                </Row>
+                            </div>
+                    }
+                </div>
+            </section>
+        </>
+    )
 
-    return null;
 }
 
 export async function getServerSideProps(context) {
     const client = buildClient(context);
 
     try {
+        if (context.query.name) {
+            const name = context.query.name
+            const { data } = await client.get(`/api/books?name=${name}`);
+            return { props: { books: data, isSearch: true } };
+        }
+
         const { data } = await client.get('/api/books');
-        console.log(data);
-        return { props: { books: data } };
+        return { props: { books: data, isSearch: false } };
 
     } catch (error) {
         return { props: {} };
