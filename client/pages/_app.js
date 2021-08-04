@@ -1,9 +1,14 @@
 import '../styles/globals.css';
+import '../styles/adminlte.min.css';
+import '../public/fontawesome-free/css/all.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import Header from '../components/header'
 import buildClient from '../helpers/build-client';
 import Head from 'next/head';
+import Navbar from '../components/navbar';
+import MainSidebar from '../components/main-sidebar';
+import Footer from '../components/footer';
 
 function MyApp({ Component, pageProps, user }) {
   return (
@@ -11,10 +16,14 @@ function MyApp({ Component, pageProps, user }) {
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header user={user} />
-      <div className="container">
-        <Component user={user} {...pageProps} />
+      <Navbar />
+      <MainSidebar />
+      <div className="wrapper">
+        <div className="content-wrapper">
+          <Component user={user} {...pageProps} />
+        </div>
       </div>
+      <Footer />
     </>
   )
 }

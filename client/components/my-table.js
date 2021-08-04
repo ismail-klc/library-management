@@ -17,7 +17,7 @@ function MyDataTable({
             onRowClicked={onClick}
             subHeaderAlign={Alignment.Left}
             subHeaderComponent={<SubHeader onClick={btnClick} />}
-            paginationPerPage={5}
+            paginationPerPage={10}
             pagination
             paginationRowsPerPageOptions={[5, 10, 25]}
             fixedHeader

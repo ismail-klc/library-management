@@ -8,6 +8,7 @@ import Router from 'next/router';
 import MyDataTable from '../../components/my-table';
 import Head from 'next/head';
 import { Badge } from 'react-bootstrap';
+import ContentHeader from '../../components/content-header';
 
 const columns = [
     {
@@ -59,13 +60,18 @@ const Students = ({ data }) => {
                 <Head>
                     <title>Students</title>
                 </Head>
-                <MyDataTable
-                    columns={columns}
-                    data={students}
-                    title="Students"
-                    onClick={e => Router.push(`/students/${e.id}`)}
-                    btnClick={() => Router.push('/students/new')}
-                />
+                <ContentHeader />
+                <section className="content">
+                    <div className="container-fluid">
+                        <MyDataTable
+                            columns={columns}
+                            data={students}
+                            title="Students"
+                            onClick={e => Router.push(`/students/${e.id}`)}
+                            btnClick={() => Router.push('/students/new')}
+                        />
+                    </div>
+                </section>
             </>
         )
     }
