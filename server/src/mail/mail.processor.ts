@@ -42,4 +42,21 @@ export class MailProcessor {
             console.log(error);
         }
     }
+
+    @Process('reset-password')
+    async resetPassword(job: Job<{ email: string, code: string }>) {
+        try {
+            await transporter.sendMail({
+                to: job.data.email,
+                from: 'library_management@gmail.com',
+                subject: 'Reset Code ✔',
+                text: 'Reset code',
+                html: `<b>The reset code is: ${job.data.code}</b>`
+            })
+
+            console.log(`Sending information email to '${job.data.email}' completed`)
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }

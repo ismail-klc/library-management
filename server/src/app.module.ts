@@ -8,9 +8,14 @@ import { BooksModule } from './books/books.module';
 import { BorrowModule } from './borrow/borrow.module';
 import { BullModule } from '@nestjs/bull';
 import { MailModule } from './mail/mail.module';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot({
+      ttl: 60 * 60 * 24,
+      limit: 1,
+    }),
     BullModule.forRoot({
       redis: {
         host: 'localhost',

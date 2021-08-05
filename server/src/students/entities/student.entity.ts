@@ -1,5 +1,6 @@
 import { Borrow } from 'src/borrow/entities/borrow.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 export enum Gender {
     Male = 'Male',
@@ -34,6 +35,7 @@ export class Student {
     class: string;
 
     @Column()
+    @Exclude()
     verifyCode: number;
 
     @OneToMany(type => Borrow, type => type.student)

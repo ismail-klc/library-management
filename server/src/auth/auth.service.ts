@@ -7,13 +7,17 @@ import { Auth } from './entities/auth.entity';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from "@nestjs/jwt";
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { Queue } from 'bull';
+import { InjectQueue } from '@nestjs/bull';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(Auth)
     private authRepository: Repository<Auth>,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    @InjectQueue('mail') private readonly mailQueue: Queue
   ) { }
 
   async signIn(signInDto: SignInDto) {
@@ -69,12 +73,59 @@ export class AuthService {
 
     if (!await bcrypt.compare(changePasswordDto.oldPassword, user.password)) {
       throw new BadRequestException(['Wrong old password']);
-    }    
+    }
 
     const hashedPassword = await bcrypt.hash(changePasswordDto.newPassword, 12);
     user.password = hashedPassword;
 
     return this.authRepository.save(user);
+  }
+
+  // send email to reset password
+  async sendResetEmail(email: string) {
+    const user = await this.authRepository.findOne({ email });
+    if (!user) {
+      throw new NotFoundException(['User not found']);
+    }
+
+    const verifyCode = Math.floor(100000 + Math.random() * 900000);
+    this.mailQueue.add('reset-password', {
+      code: verifyCode, email: user.email
+    });
+    user.code = verifyCode;
+
+    return this.authRepository.save(user);
+  }
+
+  async resetPassword(resetPasswordDto: ResetPasswordDto){
+    const user = await this.authRepository.findOne({ email: resetPasswordDto.email });
+    if (!user) {
+      throw new NotFoundException(['User not found']);
+    }
+
+    if (user.code != resetPasswordDto.code) {
+        throw new BadRequestException(['Wrong code']);
+    }
+
+    const hashedPassword = await bcrypt.hash(resetPasswordDto.password, 12);
+    user.password = hashedPassword;
+
+    return this.authRepository.save(user);
+  }
+
+  async confirmCode(code: number, email: string){
+    const user = await this.authRepository.findOne({ email });  
+    if (!user) {
+      throw new NotFoundException(['User not found']);
+    }
+
+    console.log(typeof user.code,typeof code);
+    
+    if (user.code != code) {
+        throw new BadRequestException(['Wrong code']);
+    }
+
+    return user;
   }
 
 }

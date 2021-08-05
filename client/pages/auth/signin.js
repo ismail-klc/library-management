@@ -56,6 +56,9 @@ function Signin() {
                             </Form>
                             <hr className="my-4" />
                             <div className="text-center">
+                                <Link href="/forgot-password">Forgot password</Link>
+                            </div>
+                            <div className="text-center mt-3">
                                 <Link href="/auth/signup">Create an account</Link>
                             </div>
                         </div>

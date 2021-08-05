@@ -18,4 +18,8 @@ export class Auth {
 
     @Column({ default: true })
     isActive: boolean;
+
+    @Column({ nullable: true })
+    @Exclude()
+    code: number;
 }

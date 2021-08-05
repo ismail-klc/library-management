@@ -6,10 +6,14 @@ import { Response, Request } from 'express';
 import { AuthGuard } from './guards/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { SendResetDto } from './dto/send-reset.dto';
+import { ConfirmResetDto } from './dto/confirm-reset.dto';
+import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 
 @ApiTags('auth')
 @Controller('auth')
-@UseInterceptors(ClassSerializerInterceptor)  
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
@@ -30,6 +34,30 @@ export class AuthController {
     const token = req.cookies.jwt;
 
     return this.authService.changePassword(token, changePasswordDto);
+  }
+
+  @UseGuards(ThrottlerGuard)
+  @Throttle(2, 60 * 60 * 24)
+  @Post('send-reset')
+  @HttpCode(200)
+  async sendResetEmail(@Body() params: SendResetDto) {
+    return this.authService.sendResetEmail(params.email);
+  }
+
+  @UseGuards(ThrottlerGuard)
+  @Throttle(2, 60 * 60 * 24)
+  @Post('confirm-reset')
+  @HttpCode(200)
+  async confirmCode(@Body() params: ConfirmResetDto) {
+    return this.authService.confirmCode(params.code, params.email);
+  }
+
+  @UseGuards(ThrottlerGuard)
+  @Throttle(2, 60 * 60 * 24)
+  @Post('reset-password')
+  @HttpCode(200)
+  async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+    return this.authService.resetPassword(resetPasswordDto);
   }
 
   @Post('signup')
