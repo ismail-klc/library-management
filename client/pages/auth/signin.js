@@ -3,12 +3,11 @@ import Head from 'next/head';
 import Router from 'next/router';
 import React, { useState } from 'react';
 import useRequest from '../../hooks/use-request';
-import { Form, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 function Signin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
     const { doRequest, errors } = useRequest({
         url: 'http://localhost:3000/api/auth/signin',
         method: 'post',

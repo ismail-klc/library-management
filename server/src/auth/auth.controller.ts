@@ -5,6 +5,7 @@ import { SignUpDto } from './dto/signup.dto';
 import { Response, Request } from 'express';
 import { AuthGuard } from './guards/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -21,6 +22,14 @@ export class AuthController {
     return {
       msg: 'success'
     }
+  }
+
+  @Post('change-password')
+  @HttpCode(200)
+  async changePassword(@Body() changePasswordDto: ChangePasswordDto, @Req() req: Request) {
+    const token = req.cookies.jwt;
+
+    return this.authService.changePassword(token, changePasswordDto);
   }
 
   @Post('signup')

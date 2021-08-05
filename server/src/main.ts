@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import * as cookieParser from "cookie-parser";
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as express from 'express';
+import * as compression from 'compression';
 import { join } from 'path';
 
 async function bootstrap() {
@@ -16,6 +17,8 @@ async function bootstrap() {
     origin: 'http://localhost:5000',
     credentials: true
   })
+  app.use(compression());
+
   app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
   app.setGlobalPrefix('api');
   app.use(cookieParser());

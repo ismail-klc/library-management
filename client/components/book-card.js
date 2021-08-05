@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap'
 
 function BookCard({ book }) {
     return (
-        <Card className="col-md-2 ml-4">
+        <Card className="col-md-2 col-6 col-sm-4 ml-4">
             <Card.Img
                 variant="top" src={`http://localhost:3000/uploads/${book.image}`} />
             <Card.Body>

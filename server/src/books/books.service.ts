@@ -104,7 +104,7 @@ export class BooksService {
             .orderBy('book.id', 'DESC')
             .leftJoinAndSelect("book.author", "author")
             .leftJoinAndSelect("book.type", "type")
-            .limit(4)
+            .limit(3)
             .getMany();
 
         return books;

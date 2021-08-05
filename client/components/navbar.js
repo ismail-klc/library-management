@@ -28,9 +28,9 @@ function Navbar() {
 
       <form className="form-inline ml-3" onSubmit={handleSearch}>
         <div className="input-group input-group-sm">
-          <input 
-          value={name} onChange={e => setName(e.target.value)}
-          className="form-control form-control-navbar" type="search" placeholder="Search Book By Name" aria-label="Search" />
+          <input
+            value={name} onChange={e => setName(e.target.value)}
+            className="form-control form-control-navbar" type="search" placeholder="Search Book By Name" aria-label="Search" />
           <div className="input-group-append">
             <button className="btn btn-navbar" type="submit">
               <i className="fas fa-search"></i>
@@ -40,6 +40,12 @@ function Navbar() {
       </form>
 
       <ul className="navbar-nav ml-auto">
+        <li className="nav-item d-none d-sm-inline-block">
+          <Link href="/auth/change-password" >
+            <a
+              className={`nav-link`} >Change Password</a>
+          </Link>
+        </li>
         <li className="nav-item d-none d-sm-inline-block">
           <Link href="/auth/signout" >
             <a

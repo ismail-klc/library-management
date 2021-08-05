@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SignInDto } from './dto/signin.dto';
@@ -6,6 +6,7 @@ import { SignUpDto } from './dto/signup.dto';
 import { Auth } from './entities/auth.entity';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from "@nestjs/jwt";
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -57,6 +58,23 @@ export class AuthService {
     const data = await this.jwtService.verifyAsync(token);
     const user = await this.authRepository.findOne({ id: data.id });
     return user;
+  }
+
+  async changePassword(token: string, changePasswordDto: ChangePasswordDto) {
+    const data = await this.jwtService.verifyAsync(token);
+    const user = await this.authRepository.findOne({ id: data.id });
+    if (!user) {
+      throw new NotFoundException(['User not found']);
+    }
+
+    if (!await bcrypt.compare(changePasswordDto.oldPassword, user.password)) {
+      throw new BadRequestException(['Wrong old password']);
+    }    
+
+    const hashedPassword = await bcrypt.hash(changePasswordDto.newPassword, 12);
+    user.password = hashedPassword;
+
+    return this.authRepository.save(user);
   }
 
 }
