@@ -12,7 +12,6 @@ function AuthorDetail({ data }) {
 
             </Head>
             <ContentHeader title={`${data.firstName} ${data.lastName}`}>
-                <li className="breadcrumb-item"><a href="#">Home</a></li>
                 <li className="breadcrumb-item active">Books</li>
                 <li className="breadcrumb-item active">Authors</li>
                 <li className="breadcrumb-item active">{data.firstName} {data.lastName}</li>

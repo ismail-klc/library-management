@@ -13,7 +13,6 @@ function Home({ data, books }) {
         <title>Dashboard</title>
       </Head>
       <ContentHeader title="Dashboard">
-        <li className="breadcrumb-item"><a href="#">Home</a></li>
       </ContentHeader>
       <section className="content">
         <div className="container-fluid">

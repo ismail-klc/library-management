@@ -49,7 +49,6 @@ function NewBook({ authors, types }) {
                 <title>Add New Book</title>
             </Head>
             <ContentHeader title="Add New Book">
-                <li className="breadcrumb-item"><a href="#">Home</a></li>
                 <li className="breadcrumb-item active">Books</li>
                 <li className="breadcrumb-item active">New</li>
             </ContentHeader>

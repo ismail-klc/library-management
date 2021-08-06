@@ -30,7 +30,6 @@ function NewType() {
 
             </Head>
             <ContentHeader title="Authors">
-                <li className="breadcrumb-item"><a href="#">Home</a></li>
                 <li className="breadcrumb-item active">Books</li>
                 <li className="breadcrumb-item active">Types</li>
                 <li className="breadcrumb-item active">New</li>

@@ -50,7 +50,6 @@ function Books({ books, isSearch }) {
                     <title>Books</title>
                 </Head>
                 <ContentHeader title="Books">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
                     <li className="breadcrumb-item active">Books</li>
                 </ContentHeader>
                 <section className="content">

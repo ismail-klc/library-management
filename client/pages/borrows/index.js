@@ -65,7 +65,6 @@ function Borrows({ data }) {
                     <title>Borrows</title>
                 </Head>
                 <ContentHeader title="Borrows">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
                     <li className="breadcrumb-item active">Borrows </li>
                 </ContentHeader>
                 <section className="content">

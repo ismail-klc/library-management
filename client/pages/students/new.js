@@ -37,7 +37,6 @@ function NewStudent() {
                 <title>Add New Student</title>
             </Head>
             <ContentHeader title="Add New Student">
-            <li className="breadcrumb-item"><a href="#">Home</a></li>
                     <li className="breadcrumb-item active">Students</li>
                     <li className="breadcrumb-item active">New</li>
             </ContentHeader>

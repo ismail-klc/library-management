@@ -56,7 +56,6 @@ const Students = ({ data }) => {
                     <title>Students</title>
                 </Head>
                 <ContentHeader title="Students">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
                     <li className="breadcrumb-item active">Students</li>
                 </ContentHeader>
                 <section className="content">

@@ -32,7 +32,6 @@ function NewBorrow({ books, students }) {
                 <title>Add New Borrow</title>
             </Head>
             <ContentHeader title="Add New Borrow">
-                <li className="breadcrumb-item"><a href="#">Home</a></li>
                 <li className="breadcrumb-item active">Borrows </li>
                 <li className="breadcrumb-item active">New </li>
             </ContentHeader>

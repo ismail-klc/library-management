@@ -32,7 +32,6 @@ function Types({ types }) {
                     <title>Types</title>
                 </Head>
                 <ContentHeader title="Types">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
                     <li className="breadcrumb-item active">Books</li>
                     <li className="breadcrumb-item active">Types</li>
                 </ContentHeader>

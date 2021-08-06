@@ -32,7 +32,6 @@ function StudentDetail({ data }) {
                 <title>Verify Student</title>
             </Head>
             <ContentHeader title={`${data.firstName} ${data.lastName}`}>
-                <li className="breadcrumb-item"><a href="#">Home</a></li>
                 <li className="breadcrumb-item active">Students</li>
                 <li className="breadcrumb-item active">{data.firstName} {data.lastName}</li>
             </ContentHeader>
