@@ -43,6 +43,13 @@ const columns = [
             : <Badge pill bg="danger" >&nbsp;&nbsp;&nbsp;</Badge>,
         sortable: true,
     },
+    {
+        name: 'Is Active',
+        selector: row => row.isActive
+            ? <Badge pill bg="success" >&nbsp;&nbsp;&nbsp;</Badge>
+            : <Badge pill bg="danger" >&nbsp;&nbsp;&nbsp;</Badge>,
+        sortable: true,
+    },
 ];
 
 

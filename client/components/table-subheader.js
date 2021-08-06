@@ -5,9 +5,12 @@ export const SubHeader = ({
 }) => {
     return (
         <div>
-            <Button
-                onClick={onClick}
-                className="btn-sm mb-3" variant="outline-dark">Add New</Button>
+            {
+                onClick &&
+                <Button
+                    onClick={onClick}
+                    className="btn-sm mb-3" variant="outline-dark">Add New</Button>
+            }
             {
                 filteredBoxLabel &&
                 <Form.Group className="mb-3" >

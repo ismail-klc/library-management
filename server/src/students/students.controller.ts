@@ -38,6 +38,11 @@ export class StudentsController {
         return this.studentService.getById(id);
     }
 
+    @Post('activate/:id')
+    toggleActivateStudent(@Param() id: FindOneParams){
+        return this.studentService.activateStudent(id);
+    }
+
     @Post('verify')
     @HttpCode(200)
     verifyStudent( @Body() verifyStudentDto: VerifyStudentDto) {

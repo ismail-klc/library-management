@@ -36,7 +36,7 @@ export class StudentsService {
     }
 
     async getById(params: FindOneParams) {
-        const student = await this.studentRepository.findOne({ id: params.id });
+        const student = await this.studentRepository.findOne(params.id, { relations: ['borrows', 'borrows.book'] });
         if (!student) {
             throw new BadRequestException(['student not found']);
         }
@@ -44,7 +44,7 @@ export class StudentsService {
         return student;
     }
 
-    async verifyStudent(verifyStudentDto: VerifyStudentDto){
+    async verifyStudent(verifyStudentDto: VerifyStudentDto) {
         const student = await this.studentRepository.findOne({ id: verifyStudentDto.id });
         if (!student) {
             throw new BadRequestException(['student not found']);
@@ -63,8 +63,19 @@ export class StudentsService {
         return this.studentRepository.save(student);
     }
 
-    async getCount(){
+    async getCount() {
         const studentCount = await this.studentRepository.count();
         return studentCount;
+    }
+
+    async activateStudent(params: FindOneParams){
+        const student = await this.studentRepository.findOne(params.id);
+        if (!student) {
+            throw new BadRequestException(['student not found']);
+        }
+
+        student.isActive = !student.isActive;
+
+        return this.studentRepository.save(student);
     }
 }
