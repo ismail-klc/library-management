@@ -17,13 +17,8 @@ const columns = [
         sortable: true,
     },
     {
-        name: 'First Name',
-        selector: row => row.firstName,
-        sortable: true,
-    },
-    {
-        name: 'Last Name',
-        selector: row => row.lastName,
+        name: 'Full Name',
+        selector: row => `${row.firstName} ${row.lastName}`,
         sortable: true,
     },
     {
@@ -68,7 +63,9 @@ const Students = ({ data }) => {
                     <div className="container-fluid">
                         <MyDataTable
                             columns={columns}
-                            data={students}
+                            filteredColumn="email"
+                            filteredBoxLabel="Filter By Email"
+                            data={students} 
                             title="Students"
                             onClick={e => Router.push(`/students/${e.id}`)}
                             btnClick={() => Router.push('/students/new')}

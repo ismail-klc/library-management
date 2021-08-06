@@ -7,7 +7,6 @@ import { Row } from 'react-bootstrap'
 import BookCard from "../components/book-card"
 
 function Home({ data, books }) {
-  console.log(data);
   return (
     <>
       <Head>

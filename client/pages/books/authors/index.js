@@ -43,6 +43,8 @@ function Authors({ authors }) {
                     <div className="container-fluid">
                         <MyDataTable
                             columns={columns}
+                            filteredColumn="firstName"
+                            filteredBoxLabel="Filter By Name"
                             data={authors}
                             onClick={e => Router.push(`/books/authors/${e.id}`)}
                             btnClick={() => Router.push('/books/authors/new')}

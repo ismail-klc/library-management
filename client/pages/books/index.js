@@ -43,40 +43,44 @@ const columns = [
 
 
 function Books({ books, isSearch }) {
-    return (
-        <>
-            <Head>
-                <title>Books</title>
-            </Head>
-            <ContentHeader title="Books">
-                <li className="breadcrumb-item"><a href="#">Home</a></li>
-                <li className="breadcrumb-item active">Books</li>
-            </ContentHeader>
-            <section className="content">
-                <div className="container-fluid">
-                    {
-                        !isSearch ?
-                            <MyDataTable
-                                columns={columns}
-                                data={books}
-                                onClick={e => Router.push(`/books/${e.id}`)}
-                                btnClick={() => Router.push('/books/new')}
-                            /> :
-                            <div>
-                                <Row>
-                                    {
-                                        books.map(b => (
-                                            <BookCard key={b.id} book={b} />
-                                        ))
-                                    }
-                                </Row>
-                            </div>
-                    }
-                </div>
-            </section>
-        </>
-    )
-
+    if (typeof window !== 'undefined') {
+        return (
+            <>
+                <Head>
+                    <title>Books</title>
+                </Head>
+                <ContentHeader title="Books">
+                    <li className="breadcrumb-item"><a href="#">Home</a></li>
+                    <li className="breadcrumb-item active">Books</li>
+                </ContentHeader>
+                <section className="content">
+                    <div className="container-fluid">
+                        {
+                            !isSearch ?
+                                <MyDataTable
+                                    columns={columns}
+                                    filteredColumn="name"
+                                    filteredBoxLabel="Filter By Name"
+                                    data={books}
+                                    onClick={e => Router.push(`/books/${e.id}`)}
+                                    btnClick={() => Router.push('/books/new')}
+                                /> :
+                                <div>
+                                    <Row>
+                                        {
+                                            books.map(b => (
+                                                <BookCard key={b.id} book={b} />
+                                            ))
+                                        }
+                                    </Row>
+                                </div>
+                        }
+                    </div>
+                </section>
+            </>
+        )
+    }
+    return null
 }
 
 export async function getServerSideProps(context) {

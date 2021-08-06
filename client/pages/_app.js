@@ -31,8 +31,8 @@ function MyApp({ Component, pageProps, user }) {
           :
           <Component user={user} {...pageProps} />
       }
-      <Script strategy="beforeInteractive" src="/js/jquery.min.js" />
-      <Script strategy="beforeInteractive" src="/js/adminlte.min.js" />
+      <Script key="1" strategy="beforeInteractive" src="/js/jquery.min.js" />
+      <Script key="2" strategy="beforeInteractive" src="/js/adminlte.min.js" />
     </>
   )
 }

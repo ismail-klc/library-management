@@ -50,7 +50,8 @@ const columns = [
     {
         name: 'Broughten Date',
         selector: row => row.isCompleted &&
-            DateTime.fromISO(row.broughtDate, { locale: "tr" }).toLocaleString(DateTime.DATETIME_MED)
+            DateTime.fromISO(row.broughtDate, { locale: "tr" }).toLocaleString(DateTime.DATETIME_MED),
+        sortable: true
     },
 ];
 
